@@ -3,7 +3,7 @@
 #include <cmath>
 using namespace std;
 
-const int MAX = 3;
+const int MAX = 10;
 
 double norm(vector<double>& v) {
     double sum = 0;
@@ -15,22 +15,30 @@ double norm(vector<double>& v) {
 
 double innerProduct(vector<double> v1, vector<double> v2) {
     double sum = 0;
-    for (int i = 0; i < MAX; i++) {
+    for (int i = 0; i < v1.size(); i++) {
         sum += v1[i] * v2[i];
     }
     return sum;
 }
 vector<double> add(vector<double> v1, vector<double> v2) {
     vector<double> tmp;
-    for (int i = 0; i < MAX; i++) {
+    for (int i = 0; i < v1.size(); i++) {
         tmp.push_back(v1[i] + v2[i]);
+    }
+    return tmp;
+}
+
+vector<double> subtract(vector<double> v1, vector<double> v2) {
+    vector<double> tmp;
+    for (int i = 0; i < v1.size(); i++) {
+        tmp.push_back(v1[i] - v2[i]);
     }
     return tmp;
 }
 
 vector<double> scalarMultiple(double scalar, vector<double> v2) {
     vector<double> tmp;
-    for (int i = 0; i < MAX; i++) {
+    for (int i = 0; i < v2.size(); i++) {
         tmp.push_back(scalar * v2[i]);
     }
     return tmp;
@@ -57,14 +65,15 @@ int main() {
     }
 
     for (int i = 0; i < MAX; i++) {
+        U[i] = V[i];
         for (int j = 0; j < i; j++) {
-            U[i] = add(V[i], scalarMultiple(-1, projection(U[j], V[i])));    
+            U[i] = subtract(U[i], projection(U[j], V[i]));    
         }
     }
 
     for (int i = 0; i < MAX; i++) {
         cout << "Elements of U #" << i << endl;
-        cout << E[i][0] << " " << E[i][1] << endl;
+        cout << U[i][0] << " " << U[i][1] << endl;
     }
 
     for (int i = 0; i < MAX; i++) {
@@ -75,8 +84,6 @@ int main() {
         cout << "Elements of E #" << i << endl;
         cout << E[i][0] << " " << E[i][1] << endl;
     }
-
-
 
     return 0;
 }
