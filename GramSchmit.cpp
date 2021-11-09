@@ -2,7 +2,6 @@
 #include <vector>
 #include <cmath>
 using namespace std;
-
 const int MAX = 10;
 
 double norm(vector<double>& v) {
