@@ -1,2 +1,2 @@
 # MAT2003
-Linear Algebra @ Hanyang Univ
+Linear Algebra @ Hanyang Univ.
