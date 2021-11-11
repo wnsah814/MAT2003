@@ -3,7 +3,7 @@
 #include <array>
 #include <cmath>
 using namespace std;
-const int MAX;
+const int MAX = 3;
 
 double norm(vector<double>& v) {
     double sum = 0;
@@ -61,12 +61,11 @@ int main() {
     int N;
     cout << "Enter N(dimension): ";
     cin >> N;
-    MAX = N;
     array<vector<double>, MAX> V;
     array<vector<double>, MAX> U;
     array<vector<double>, MAX> E;
     for (int i = 0; i < MAX; i++) {
-        cout << "Enter elements of #" << i << " vector: " << endl;
+        cout << "Enter #" << i << " vector of V: " << endl;
         for (int j = 0; j < N; j++) {
             double tmp;
             cin >> tmp;
@@ -80,11 +79,16 @@ int main() {
             U[i] = subtract(U[i], projection(U[j], V[i]));    
         }
     }
+    cout << "Matrix [V]:" << endl;
+    printV(V);
+    
+    cout << "Matrix [U]:" << endl;
+    printV(U);
 
     for (int i = 0; i < MAX; i++) {
         E[i] = scalarMultiple(1/norm(U[i]), U[i]);
     }
-    cout << "Orthonormal Basis Vectors by GramSchmidt Method:" << endl;
+    cout << "Matrix [E]:" << endl;
     printV(E);
 
     return 0;
