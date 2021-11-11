@@ -20,13 +20,6 @@ double innerProduct(vector<double> v1, vector<double> v2) {
     }
     return sum;
 }
-vector<double> add(vector<double> v1, vector<double> v2) {
-    vector<double> tmp;
-    for (int i = 0; i < v1.size(); i++) {
-        tmp.push_back(v1[i] + v2[i]);
-    }
-    return tmp;
-}
 
 vector<double> subtract(vector<double> v1, vector<double> v2) {
     vector<double> tmp;
@@ -89,3 +82,4 @@ int main() {
 
     return 0;
 }
+
