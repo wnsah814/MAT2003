@@ -21,6 +21,15 @@ double innerProduct(vector<double> v1, vector<double> v2) {
     return sum;
 }
 
+void printV(array<vector<double>, MAX> v) {
+    for (int i = 0; i < v[i].size(); i++) {
+        for (int j = 0; j < MAX; j++) {
+            cout << v[j][i] << " ";
+        }
+        cout << endl;
+    }
+}
+
 vector<double> subtract(vector<double> v1, vector<double> v2) {
     vector<double> tmp;
     for (int i = 0; i < v1.size(); i++) {
@@ -39,15 +48,6 @@ vector<double> scalarMultiple(double scalar, vector<double> v2) {
 
 vector<double> projection(vector<double> v1, vector<double> v2) {
     return scalarMultiple(innerProduct(v1, v2) / innerProduct(v1,v1), v1);
-}
-
-void printV(array<vector<double>, MAX> v) {
-    for (int i = 0; i < v[i].size(); i++) {
-        for (int j = 0; j < MAX; j++) {
-            cout << v[j][i] << " ";
-        }
-        cout << endl;
-    }
 }
 
 int main() {
@@ -82,4 +82,3 @@ int main() {
 
     return 0;
 }
-
