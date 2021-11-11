@@ -3,7 +3,7 @@
 #include <array>
 #include <cmath>
 using namespace std;
-const int MAX;
+int MAX;
 
 double norm(vector<double>& v) {
     double sum = 0;
