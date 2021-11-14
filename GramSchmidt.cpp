@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#define zeroBound 10e-10`
+#define zeroBound 10e-10
 using namespace std;
 
 double norm(vector<double>& v) {
