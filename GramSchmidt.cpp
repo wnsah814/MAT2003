@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#define zeroBound 10e-10`
 using namespace std;
 
 double norm(vector<double>& v) {
@@ -39,6 +40,14 @@ vector<double> projection(vector<double> v1, vector<double> v2) {
     return scalarMultiple(innerProduct(v1, v2) / innerProduct(v1,v1), v1);
 }
 
+bool checkSmall(double val) {
+    if (val > -1 * zeroBound && val < zeroBound) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 int main() {
     int N;
     cout << "Enter N(dimension of vector): ";
@@ -48,7 +57,7 @@ int main() {
     vector<double> U[MAX];
     vector<double> E[MAX];
     
-
+    //Get N by N Matrix(N-D vectors N times) from user. 
     for (int i = 0; i < MAX; i++) {
         cout << "Enter elements of #" << i << " vector: " << endl;
         for (int j = 0; j < N; j++) {
@@ -83,7 +92,7 @@ int main() {
     for (int i = 0, n = -1; i < N; i++) {
         n++;
         for (int j = 0; j < MAX; j++) {
-            if (E[j][n] < 10e-10) E[j][n] = 0;
+            // if (E[j][n] < 10e-10) E[j][n] = 0;
             cout << E[j][n] << " ";
         }
         cout << endl;
@@ -92,7 +101,9 @@ int main() {
     cout << "Numerical verification that E is an orthonormal set\n";
     for (int i = 0; i < MAX; i++) {
         for (int j = i; j < MAX; j++) {
-            cout << "q" << i << " * q" << j << " = " << innerProduct(E[i], E[j]) << endl;
+            double value = innerProduct(E[i], E[j]);
+            if (checkSmall(value)) value = 0;
+            cout << "q" << i << " * q" << j << " = " << value << endl;
         }
     }
 
