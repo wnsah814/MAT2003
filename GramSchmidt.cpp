@@ -3,7 +3,6 @@
 #include <array>
 #include <cmath>
 using namespace std;
-int MAX;
 
 double norm(vector<double>& v) {
     double sum = 0;
@@ -19,15 +18,6 @@ double innerProduct(vector<double> v1, vector<double> v2) {
         sum += v1[i] * v2[i];
     }
     return sum;
-}
-
-void printV(array<vector<double>, MAX> v) {
-    for (int i = 0; i < v[i].size(); i++) {
-        for (int j = 0; j < MAX; j++) {
-            cout << v[j][i] << " ";
-        }
-        cout << endl;
-    }
 }
 
 vector<double> subtract(vector<double> v1, vector<double> v2) {
@@ -54,10 +44,16 @@ int main() {
     int N;
     cout << "Enter N(dimension): ";
     cin >> N;
-    MAX = N;
-    array<vector<double>, MAX> V;
-    array<vector<double>, MAX> U;
-    array<vector<double>, MAX> E;
+    int MAX;
+    cout << "Enter M: ";
+    cin >> MAX;
+    vector<double> V[MAX];
+    vector<double> U[MAX];
+    vector<double> E[MAX];
+    // array<vector<double>, MAX> V;
+    // array<vector<double>, MAX> U;
+    // array<vector<double>, MAX> E;
+    
     for (int i = 0; i < MAX; i++) {
         cout << "Enter elements of #" << i << " vector: " << endl;
         for (int j = 0; j < N; j++) {
@@ -74,11 +70,34 @@ int main() {
         }
     }
 
+    //Normalize
     for (int i = 0; i < MAX; i++) {
         E[i] = scalarMultiple(1/norm(U[i]), U[i]);
     }
+
+    //Check Linearly Independent
+    for (int i = 0; i < MAX; i++) {
+        if (norm(U[i]) == 0) {
+            cout << i << "th is not independent! Enter another vector.\n";
+            return 0;
+        }
+    }
+
     cout << "Orthonormal Basis Vectors by GramSchmidt Method:" << endl;
-    printV(E);
+    for (int i = 0, n = -1; i < N; i++) {
+        n++;
+        for (int j = 0; j < MAX; j++) {
+            cout << E[j][n] << " ";
+        }
+        cout << endl;
+    }
+    
+    cout << "Numerical verification that E is an orthonormal set\n";
+    for (int i = 0; i < MAX; i++) {
+        for (int j = i; j < MAX; j++) {
+            cout << "q" << i << " * q" << j << " = " << innerProduct(E[i], E[j]) << endl;
+        }
+    }
 
     return 0;
 }
