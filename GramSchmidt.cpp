@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <array>
 #include <cmath>
 using namespace std;
 
@@ -42,18 +41,14 @@ vector<double> projection(vector<double> v1, vector<double> v2) {
 
 int main() {
     int N;
-    cout << "Enter N(dimension): ";
+    cout << "Enter N(dimension of vector): ";
     cin >> N;
-    int MAX;
-    cout << "Enter M: ";
-    cin >> MAX;
+    int MAX = N;
     vector<double> V[MAX];
     vector<double> U[MAX];
     vector<double> E[MAX];
-    // array<vector<double>, MAX> V;
-    // array<vector<double>, MAX> U;
-    // array<vector<double>, MAX> E;
     
+
     for (int i = 0; i < MAX; i++) {
         cout << "Enter elements of #" << i << " vector: " << endl;
         for (int j = 0; j < N; j++) {
@@ -63,6 +58,7 @@ int main() {
         }
     }
 
+    //V to U
     for (int i = 0; i < MAX; i++) {
         U[i] = V[i];
         for (int j = 0; j < i; j++) {
@@ -78,7 +74,7 @@ int main() {
     //Check Linearly Independent
     for (int i = 0; i < MAX; i++) {
         if (norm(U[i]) == 0) {
-            cout << i << "th is not independent! Enter another vector.\n";
+            cout << "#" << i << " is not independent! Enter another vector.\n";
             return 0;
         }
     }
@@ -87,6 +83,7 @@ int main() {
     for (int i = 0, n = -1; i < N; i++) {
         n++;
         for (int j = 0; j < MAX; j++) {
+            if (E[j][n] < 10e-10) E[j][n] = 0;
             cout << E[j][n] << " ";
         }
         cout << endl;
